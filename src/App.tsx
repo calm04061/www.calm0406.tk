@@ -45,25 +45,21 @@ export default function App() {
                 {/* A <Switch> looks through its children <Route>s and renders the first one that matches the current URL. */}
             </AppBar>
             <Toolbar/>
-            <Container>
-                <Switch>
-                    <Route path="/about">
-                        <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Container>
+                    <Switch>
+                        <Route path="/about">
                             <About/>
-                        </Suspense>
-                    </Route>
-                    <Route path="/users">
-                        <Suspense fallback={<div>Loading...</div>}>
+                        </Route>
+                        <Route path="/users">
                             <User/>
-                        </Suspense>
-                    </Route>
-                    <Route path="/">
-                        <Suspense fallback={<div>Loading...</div>}>
+                        </Route>
+                        <Route path="/">
                             <Home/>
-                        </Suspense>
-                    </Route>
-                </Switch>
-            </Container>
+                        </Route>
+                    </Switch>
+                </Container>
+            </Suspense>
         </React.Fragment>
     );
 }

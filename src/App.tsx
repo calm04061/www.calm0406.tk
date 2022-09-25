@@ -1,31 +1,47 @@
 import React from "react";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+import {Switch, Route, NavLink} from "react-router-dom";
 import Home from "./view/Home";
+import {AppBar, IconButton, Container, Toolbar} from "@mui/material";
+
 export default function App() {
     return (
-        <Router>
-            <div>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/about">About</Link>
-                        </li>
-                        <li>
-                            <Link to="/users">Users</Link>
-                        </li>
-                    </ul>
-                </nav>
-
-                {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+        <React.Fragment>
+            <AppBar>
+                <Container>
+                    <Toolbar>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            color="inherit"
+                        >
+                            <NavLink to="/" className="link">Home</NavLink>
+                        </IconButton>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            color="inherit"
+                        >
+                            <NavLink to="/about">About</NavLink>
+                        </IconButton>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            color="inherit"
+                        >
+                            <NavLink to="/users">Users</NavLink>
+                        </IconButton>
+                    </Toolbar>
+                </Container>
+                {/* A <Switch> looks through its children <Route>s and renders the first one that matches the current URL. */}
+            </AppBar>
+            <Toolbar/>
+            <Container>
                 <Switch>
                     <Route path="/about">
                         <About/>
@@ -37,8 +53,8 @@ export default function App() {
                         <Home/>
                     </Route>
                 </Switch>
-            </div>
-        </Router>
+            </Container>
+        </React.Fragment>
     );
 }
 

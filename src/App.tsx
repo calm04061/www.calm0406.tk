@@ -1,7 +1,11 @@
-import React from "react";
+import React, {Suspense} from 'react';
 import {Switch, Route, NavLink} from "react-router-dom";
-import Home from "./view/Home";
+
 import {AppBar, IconButton, Container, Toolbar} from "@mui/material";
+
+const Home = React.lazy(() => import('./view/Home'));
+const About = React.lazy(() => import('./view/About'));
+const User = React.lazy(() => import('./view/User'));
 
 export default function App() {
     return (
@@ -44,24 +48,22 @@ export default function App() {
             <Container>
                 <Switch>
                     <Route path="/about">
-                        <About/>
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <About/>
+                        </Suspense>
                     </Route>
                     <Route path="/users">
-                        <Users/>
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <User/>
+                        </Suspense>
                     </Route>
                     <Route path="/">
-                        <Home/>
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <Home/>
+                        </Suspense>
                     </Route>
                 </Switch>
             </Container>
         </React.Fragment>
     );
-}
-
-function About() {
-    return <h2>About</h2>;
-}
-
-function Users() {
-    return <h2>Users</h2>;
 }

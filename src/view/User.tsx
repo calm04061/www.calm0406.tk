@@ -3,7 +3,7 @@ export default function User() {
     return (<div>
         <h2>User</h2>
         <Button variant="contained">
-            Button
+            Button1
         </Button>
     </div>);
 }

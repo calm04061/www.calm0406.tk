@@ -14,3 +14,22 @@ if (typeof globalThis.TextEncoder === 'undefined') {
 if (typeof globalThis.TextDecoder === 'undefined') {
   Object.assign(globalThis, { TextDecoder });
 }
+
+// jsdom 不提供完整的 Web Crypto（缺少 subtle），用 Node 的 webcrypto 补齐，
+// 供加解密工具的单元测试使用。
+import { webcrypto } from 'node:crypto';
+
+if (typeof globalThis.crypto === 'undefined') {
+  Object.defineProperty(globalThis, 'crypto', {
+    value: webcrypto,
+    configurable: true,
+    writable: true,
+  });
+} else if (!globalThis.crypto.subtle) {
+  // jsdom 自带 crypto（仅 getRandomValues），把 subtle 挂到现有对象上
+  Object.defineProperty(globalThis.crypto, 'subtle', {
+    value: (webcrypto as unknown as Crypto).subtle,
+    configurable: true,
+    writable: true,
+  });
+}

@@ -1,11 +1,15 @@
 import React, {Suspense} from 'react';
-import {Switch, Route, NavLink} from "react-router-dom";
+import {Routes, Route, NavLink} from "react-router-dom";
 
 import {AppBar, IconButton, Container, Toolbar} from "@mui/material";
 
 const Home = React.lazy(() => import('./view/Home'));
 const About = React.lazy(() => import('./view/About'));
 const User = React.lazy(() => import('./view/User'));
+const Codec = React.lazy(() => import('./view/tools/Codec'));
+const CryptoTool = React.lazy(() => import('./view/tools/Crypto'));
+const TimeConvert = React.lazy(() => import('./view/tools/TimeConvert'));
+const JsonFormat = React.lazy(() => import('./view/tools/JsonFormat'));
 
 export default function App() {
     return (
@@ -42,22 +46,19 @@ export default function App() {
                         </IconButton>
                     </Toolbar>
                 </Container>
-                {/* A <Switch> looks through its children <Route>s and renders the first one that matches the current URL. */}
             </AppBar>
             <Toolbar/>
             <Suspense fallback={<div>Loading...</div>}>
                 <Container>
-                    <Switch>
-                        <Route path="/about">
-                            <About/>
-                        </Route>
-                        <Route path="/users">
-                            <User/>
-                        </Route>
-                        <Route path="/">
-                            <Home/>
-                        </Route>
-                    </Switch>
+                    <Routes>
+                        <Route path="/about" element={<About/>}/>
+                        <Route path="/users" element={<User/>}/>
+                        <Route path="/tools/codec" element={<Codec/>}/>
+                        <Route path="/tools/crypto" element={<CryptoTool/>}/>
+                        <Route path="/tools/time" element={<TimeConvert/>}/>
+                        <Route path="/tools/json" element={<JsonFormat/>}/>
+                        <Route path="/" element={<Home/>}/>
+                    </Routes>
                 </Container>
             </Suspense>
         </React.Fragment>
